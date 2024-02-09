@@ -1,1 +1,3 @@
-# emews-r
+= emews-r
+
+A simple Anaconda package with unmodified R from SVN for use with EMEWS.
