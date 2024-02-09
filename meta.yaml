@@ -1,11 +1,10 @@
 
 {% set name = "emews-r" %}
-{% set version = "" %}
+{% set version = "85879" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
-  sha256: {{ sha256 }}
 
 source:
   path: /Users/woz/proj/r-svn-clean
@@ -20,15 +19,20 @@ build:
 # Remember to sync any dependency changes here with conda-install.sh
 requirements:
   build:
-    - autoconf
-    - make
+    - libcurl
+    - pcre2
+    - xz
     - gfortran
 
   run:
+    - libcurl
+    - pcre2
+    - xz
     - gfortran
 
 test:
   commands:
+    - which Rscript
     - R -e 'print("R-SUCCESS")'
 
 about:
