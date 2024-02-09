@@ -1,0 +1,41 @@
+
+{% set name = "emews-r" %}
+{% set version = "" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+  sha256: {{ sha256 }}
+
+source:
+  path: /Users/woz/proj/r-svn-clean
+
+build:
+  number: 1
+  # Environment variables for build.sh must be listed here,
+  # normal environment inheritance does not happen!
+  script_env:
+    - PLATFORM=osx-arm64
+
+# Remember to sync any dependency changes here with conda-install.sh
+requirements:
+  build:
+    - autoconf
+    - make
+    - gfortran
+
+  run:
+    - gfortran
+
+test:
+  commands:
+    - R -e 'print("R-SUCCESS")'
+
+about:
+  home: https://github.com/emews/emews-r
+  license: Apache License 2.0
+  summary: EMEWS build for R
+
+extra:
+  recipe-maintainers:
+    - swift-t
