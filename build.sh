@@ -116,4 +116,12 @@ do-configure()
   echo "INSTALL R STOP:  $( date '+%Y-%m-%d %H:%M:%S' )"
 } | tee $RECIPE_DIR/build-install.log
 
+# Test it!
+{
+  echo "TEST R START: $( date '+%Y-%m-%d %H:%M:%S' )"
+  $CONDA_PREFIX/bin/R --version
+  $CONDA_PREFIX/bin/R -e 'cat("R-TEST:", 42, "\n")'
+  echo "TEST R STOP:  $( date '+%Y-%m-%d %H:%M:%S' )"
+} 2>&1 | tee $RECIPE_DIR/build-test.log
+
 echo "BUILD.SH STOP $( date '+%Y-%m-%d %H:%M:%S' )"
