@@ -7,6 +7,7 @@ package:
   version: {{ version }}
 
 source:
+  # User needs to manually update this:
   path: /Users/woz/proj/r-svn-clean
 
 build:
