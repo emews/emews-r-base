@@ -1,5 +1,5 @@
 
-{% set name = "emews-r" %}
+{% set name = "emews-r-base" %}
 {% set version = "85879" %}
 
 package:
@@ -39,7 +39,7 @@ test:
     - R -e 'cat("R-SUCCESS:", 42, "\n")'
 
 about:
-  home: https://github.com/emews/emews-r
+  home: https://github.com/emews/emews-r-base
   license: Apache License 2.0
   summary: EMEWS build for R
 
