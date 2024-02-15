@@ -32,8 +32,10 @@ requirements:
 
 test:
   commands:
-    - which Rscript
-    - R -e 'print("R-SUCCESS")'
+    - echo
+    - echo "meta.yaml test commands:"
+    - which R Rscript
+    - R -e 'cat("R-SUCCESS:", 42, "\n")'
 
 about:
   home: https://github.com/emews/emews-r

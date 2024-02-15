@@ -105,6 +105,14 @@ print
 log "conda build succeeded."
 print
 
+# Look for success from meta.yaml:test:commands:
+# Output
+if ! grep -q "R-SUCCESS: 42" $LOG
+then
+  log "FATAL: Did not find R-SUCCESS in $LOG"
+  exit 1
+fi
+
 # Find the "upload" text for the PKG in the LOG,
 #      this will give us the PKG file name
 log "looking for upload line in $LOG ..."
