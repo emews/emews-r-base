@@ -1,4 +1,7 @@
+
 = emews-r
+
+*THIS PACKAGE IS NO LONGER NEEDED as of 2024-12-06*
 
 A simple Anaconda package with unmodified R from SVN for use with EMEWS.
 
