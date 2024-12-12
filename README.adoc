@@ -1,11 +1,9 @@
 
-= emews-r
-
-*THIS PACKAGE IS NO LONGER NEEDED as of 2024-12-06*
+= emews-r-base
 
 A simple Anaconda package with unmodified R from SVN for use with EMEWS.
 
-Only necessary for platform `osx-arm64`.
+Only necessary for platform `osx-arm64`, due to a memory error in the official Anaconda release.  Still a problem as of 2024-12-12.
 
 == Notes
 
