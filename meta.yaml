@@ -1,9 +1,9 @@
 
-{% set name = "emews-r-base" %}
+{% set name = "emews-r" %}
 {% set version = "85879" %}
 
 package:
-  name: {{ name }}
+  name:    {{ name }}
   version: {{ version }}
 
 source:
