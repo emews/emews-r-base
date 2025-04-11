@@ -1,21 +1,26 @@
 
+# META YAML
+
 {% set name = "emews-r" %}
-{% set version = "85879" %}
+# See README for version meanings:
+{% set version = "6" %}
 
 package:
   name:    {{ name }}
   version: {{ version }}
 
 source:
-  # User needs to manually update this:
-  path: /Users/woz/proj/r-svn-clean
+  # R_SVN is exported by conda-build.sh
+  path: {{ environ.get('R_SVN', 'UNSET_R_SVN') }}
 
 build:
   number: 1
   # Environment variables for build.sh must be listed here,
   # normal environment inheritance does not happen!
   script_env:
-    - PLATFORM=osx-arm64
+    - PLATFORM={{ environ.get('PLATFORM', 'UNSET_PLATFORM') }}
+    - CONFIG_ONLY={{ environ.get('CONFIG_ONLY', '0') }}
+    - GITHUB_ACTIONS
 
 # Remember to sync any dependency changes here with conda-install.sh
 requirements:
@@ -24,19 +29,39 @@ requirements:
     - pcre2
     - xz
     - gfortran
+    - zlib
+    # For X11:
+    # xorg-x11-proto-devel-cos6-x86_64
+    - xorg-libx11 # xorg-x11-proto-devel
+    - xorg-xorgproto
+    - xorg-libxt  # For X11/Intrinsic.h
+    - libiconv  # For iconv.h
+    - cairo
+    - clangxx
+    # Try ncurses
 
   run:
     - libcurl
     - pcre2
     - xz
     - gfortran
+    - zlib
+    # For X11:
+    # xorg-x11-proto-devel-cos6-x86_64
+    - xorg-libx11 # xorg-x11-proto-devel
+    - xorg-xorgproto
+    - xorg-libxt  # For X11/Intrinsic.h
+    - libiconv  # For iconv.h
+    - cairo
+    # New 2025-04-07
+    - clangxx
 
 test:
+  files:
+    - ./meta-test.sh
   commands:
-    - echo
-    - echo "meta.yaml test commands:"
-    - which R Rscript
-    - R -e 'cat("R-SUCCESS:", 42, "\n")'
+    - pwd
+    - ./meta-test.sh
 
 about:
   home: https://github.com/emews/emews-r-base
