@@ -139,7 +139,6 @@ if (( ${#S} )) {
       --dirty
       --keep-old-work
       # --no-remove-work-dir
-      --prefix-length 128
       .
     )
 
