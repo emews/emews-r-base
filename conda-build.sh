@@ -81,11 +81,9 @@ fi
 PYTHON_EXE=( =python )
 # Get its directory:
 PYTHON_BIN=${PYTHON_EXE:h}
-
-# print LISTING
-# print PYTHON_EXE $PYTHON_EXE $PYTHON_BIN
-# ls $PYTHON_BIN
-# conda list
+# Get 2nd token from the version string:
+PV=( $( python --version ) )
+PV=${PV[2]}
 
 # Check that the conda-build tool in use is in the
 #       selected Python installation
@@ -114,21 +112,30 @@ if [[ -f $LOG ]] {
   print
 }
 
+# Select clang name for meta.yaml macro
+# Dropping Python 3.9 on OS/X: GH has package issues
+export CLANG_NAME="clang"
+if [[ $PV =~ 3.9* ]] CLANG_NAME="clang-18"
+log "using CLANG_NAME='$CLANG_NAME'" | tee $LOG
+
 if (( ${#S} )) {
   log "settings-only: exit." | tee $LOG
   return
 }
 
+# Disable
+# "UserWarning: The environment variable 'X' is being passed through"
+export PYTHONWARNINGS="ignore::UserWarning"
+
 {
-  log "CONDA BUILD: START:"
-  print
+  log "START ..."
   (
+    log "PLATFORM:     " $PLATFORM
     log "using python: " $( which python )
     log "using conda:  " $( which conda  )
-    log "PLATFORM:     " $PLATFORM
-    print
-    conda env list
-    print
+
+    # conda env list
+    # print
 
     # This purge-all is extremely important:
     log "purge-all ..."
@@ -143,18 +150,16 @@ if (( ${#S} )) {
     )
 
     # Build the package!
-    log "main build args: $BUILD_ARGS"
+    log "conda build: $BUILD_ARGS"
     conda build $BUILD_ARGS
   )
-  log "CONDA BUILD: STOP: ${(%)DATE_FMT_S}"
+  log "STOP."
 } |& tee $LOG
-print
-log "SUCCESS."
 print
 
 if (( ${CONFIG_ONLY:-0} )) {
-  log "configure-only: done."
-  return
+  log "configure-only: exit."
+  exit
 }
 
 # Look for success from meta.yaml:test:commands:

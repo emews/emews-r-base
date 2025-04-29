@@ -17,7 +17,6 @@ set -o pipefail
 # and this script sets RECIPE_DIR.  PREFIX will be unset.
 
 TIMESTAMP=$( date '+%Y-%m-%d %H:%M:%S' )
-
 echo
 echo "BUILD.SH START $TIMESTAMP"
 echo
@@ -38,6 +37,8 @@ then
   echo "Interactive mode: RECIPE_DIR=$RECIPE_DIR"
 fi
 
+source $RECIPE_DIR/setup-compilers.sh
+
 {
   echo "python:" $( which python )
   show TIMESTAMP
@@ -45,6 +46,7 @@ fi
   show RECIPE_DIR
   show SRC_DIR
   show PREFIX
+  show CC
 } | tee $RECIPE_DIR/build-metadata.log
 
 if [[ $PLATFORM =~ osx-* ]]
@@ -57,19 +59,9 @@ fi
 printenv ${NULL} | sort ${ZT} | tr '\0' '\n' > \
                                    $RECIPE_DIR/build-env.log
 
-# if ! SDKROOT=$( xcrun --show-sdk-path )
-# then
-#   print "Error in xcrun!"
-#   exit 1
-# fi
-# export SDKROOT
-# show SDKROOT >> $RECIPE_DIR/build-metadata.log
-
 do-configure()
 {
   # CONDA_PREFIX should be the installation-time Python location
-
-  source $RECIPE_DIR/setup-compilers.sh
 
   echo "CONFIGURE ARGUMENTS:"
   A=(  --prefix=$CONDA_PREFIX
@@ -149,8 +141,9 @@ fi
 # Make it!
 echo   LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-}
 export LD_LIBRARY_PATH=$CONDA_PREFIX/lib
+export LD_LIBRARY_PATH=$SRC_DIR/lib:$LD_LIBRARY_PATH
 echo PWD=$PWD
-do-command make make # -j 4
+do-command make make -j 4
 
 # Install it!
 do-command install make install
@@ -163,6 +156,7 @@ do-command install make install
   echo "TEST R STOP:  $( date '+%Y-%m-%d %H:%M:%S' )"
 } 2>&1 | tee $RECIPE_DIR/build-test.log
 
+TIMESTAMP=$( date '+%Y-%m-%d %H:%M:%S' )
 echo
-echo "BUILD.SH STOP $( date '+%Y-%m-%d %H:%M:%S' )"
+echo "BUILD.SH STOP $TIMESTAMP"
 echo

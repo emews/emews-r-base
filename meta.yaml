@@ -30,13 +30,14 @@ requirements:
     - xz
     - gfortran
     - zlib
-    # For X11:
-    # xorg-x11-proto-devel-cos6-x86_64
     - xorg-libx11 # xorg-x11-proto-devel
     - xorg-xorgproto
     - xorg-libxt  # For X11/Intrinsic.h
     - libiconv  # For iconv.h
     - cairo
+    # For Python 3.9.7, try clang-16, clangxx(15.0.7)
+    # try clang-14,15,16 did not work (duplicate LC_RPATH issue)
+    - {{ environ.get('CLANG_NAME', 'UNSET_CLANG_NAME') }}
     - clangxx
     # Try ncurses
 
@@ -46,14 +47,12 @@ requirements:
     - xz
     - gfortran
     - zlib
-    # For X11:
-    # xorg-x11-proto-devel-cos6-x86_64
     - xorg-libx11 # xorg-x11-proto-devel
     - xorg-xorgproto
     - xorg-libxt  # For X11/Intrinsic.h
     - libiconv  # For iconv.h
     - cairo
-    # New 2025-04-07
+    - {{ environ.get('CLANG_NAME', 'UNSET_CLANG_NAME') }}
     - clangxx
 
 test:
