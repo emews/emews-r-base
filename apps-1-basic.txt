@@ -1,0 +1,4 @@
+# Basic math apps
+mgcv
+farver
+ggplot2

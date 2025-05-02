@@ -1,8 +1,10 @@
 #!/bin/bash
 set -eu
+set -o pipefail
 
 # INSTALL APPS
 
+# This passes all non-flag arguments to the R script
 # pass CONFIRM=0 via command line for by passing options,
 #      default is CONFIRM=1
 : ${CONFIRM:=1}
@@ -10,14 +12,15 @@ set -eu
 while getopts ":y" OPTION
 do
   case $OPTION in
-    y) CONFIRM=0
-       ;;
+    y) CONFIRM=0 ;;
+    -) break     ;;
     *) # The shell error message was disabled above
        echo "install-apps.sh: unknown option: $*"
        exit 1
        ;;
   esac
 done
+shift $(( OPTIND - 1 ))
 
 echo "This will install multiple R packages."
 echo
@@ -32,7 +35,7 @@ echo "variables:"
 set +u  # These variables may be unset
 for var in CC CPP CXX FC
 do
-  printf "using %-8s = %s\n" $var ${!var}
+  printf "using %-3s = %s\n" $var ${!var}
 done
 echo
 set -u
@@ -46,7 +49,7 @@ for tool in $CC $CPP $CXX $FC R
 do
   if which $tool 2>&1 > /dev/null
   then
-    printf "using %-25s %s\n" "${tool}:" $( which $tool )
+    printf "using %-15s %s\n" "${tool}:" $( which $tool )
   else
     echo "not found: $tool"
   fi
@@ -64,4 +67,4 @@ fi
 THIS=$( dirname $0 )
 
 # Do it!
-nice R -q -f $THIS/install-apps.R 2>&1 | tee install-apps.log
+nice Rscript $THIS/install-apps.R ${*} 2>&1 | tee install-apps.log
