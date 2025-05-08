@@ -67,4 +67,4 @@ fi
 THIS=$( dirname $0 )
 
 # Do it!
-nice Rscript $THIS/install-apps.R ${*} 2>&1 | tee install-apps.log
+nice Rscript $THIS/install_list.R ${*} 2>&1 | tee install-apps.log
