@@ -39,6 +39,14 @@ requirements:
     # try clang-14,15,16 did not work (duplicate LC_RPATH issue)
     - {{ environ.get('CLANG_NAME', 'UNSET_CLANG_NAME') }}
     - clangxx
+    # cctools: internal dependency
+    # For compile-time error when installing R package 'lattice'
+    # Updates Anaconda package 'ld64' to later than 2025-04-01
+    # Cf. https://fenicsproject.discourse.group/t/duplicate-lc-rpath-errors-on-macos-15-4-sequoia/17364/6
+    #     https://github.com/emews/EMEWS_Issues/issues/65
+    #     https://github.com/emews/EMEWS_Issues/issues/77
+    # 2025-05-12
+    - cctools==1010.6
     # Try ncurses
 
   run:
@@ -53,6 +61,8 @@ requirements:
     - libiconv  # For iconv.h
     - cairo
     - {{ environ.get('CLANG_NAME', 'UNSET_CLANG_NAME') }}
+    # See comment above
+    - cctools==1010.6
     - clangxx
 
 test:
