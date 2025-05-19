@@ -15,12 +15,17 @@ do
     y) CONFIRM=0 ;;
     -) break     ;;
     *) # The shell error message was disabled above
-       echo "install-apps.sh: unknown option: $*"
+       echo "install_list.sh: unknown option: $*"
        exit 1
        ;;
   esac
 done
 shift $(( OPTIND - 1 ))
+if (( ${#} == 0 ))
+then
+  echo "install_list.sh: provide a list of packages!"
+  exit 1
+fi
 
 echo "This will install multiple R packages."
 echo
