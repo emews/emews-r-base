@@ -7,7 +7,7 @@ Only necessary for platform `osx-arm64`, due to a memory error in the official A
 
 Remember to use `capabilities()` to check features.
 
-Using R from SVN release branch 4.4.3 .
+Using R from SVN release branch 4.4.3 .  If this changes, update the EMEWS Tutorial docs.
 
 == User installation
 
