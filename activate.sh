@@ -7,7 +7,10 @@
 #      found and loaded
 # This effect is visible in .libPaths()
 
-echo "emews-r activate.sh: setting R_LIBS_USER"
+if [ ${CONDA_VERBOSITY:-0} > 0 ]
+then
+  echo "emews-r activate.sh: setting R_LIBS_USER"
+fi
 
 if [[ ! -z ${R_LIBS_USER+x} ]]; then
   export R_LIBS_USER_BACKUP="$R_LIBS_USER"
