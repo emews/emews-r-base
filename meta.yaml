@@ -3,7 +3,7 @@
 
 {% set name = "emews-r" %}
 # See README for version meanings:
-{% set version = "6" %}
+{% set version = "7" %}
 
 package:
   name:    {{ name }}
@@ -37,7 +37,7 @@ requirements:
     - cairo
     # For Python 3.9.7, try clang-16, clangxx(15.0.7)
     # try clang-14,15,16 did not work (duplicate LC_RPATH issue)
-    - {{ environ.get('CLANG_NAME', 'UNSET_CLANG_NAME') }}
+    - {{ environ.get('SPEC_CLANG', 'UNSET_SPEC_CLANG') }}
     - clangxx
     # cctools: internal dependency
     # For compile-time error when installing R package 'lattice'
@@ -60,7 +60,7 @@ requirements:
     - xorg-libxt  # For X11/Intrinsic.h
     - libiconv  # For iconv.h
     - cairo
-    - {{ environ.get('CLANG_NAME', 'UNSET_CLANG_NAME') }}
+    - {{ environ.get('SPEC_CLANG', 'UNSET_SPEC_CLANG') }}
     # See comment above
     - cctools==1010.6
     - clangxx
