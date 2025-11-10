@@ -58,6 +58,10 @@ emews-r::
 . Added package `clangxx` at runtime
 . Ready for testing
 
+=== Numbers
+
+* *7* : 2025-11-07 : Clean up `activate/deactivate.sh` output. Issue emews/EMEWS_Issues#80
+
 == Usage
 
 . Install a build Miniconda

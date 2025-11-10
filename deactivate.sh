@@ -1,9 +1,8 @@
-#!/bin/sh
 
 # DEACTIVATE SH
 # See activate.sh
 
-if [ ${CONDA_VERBOSITY:-0} > 0 ]
+if [[ ${CONDA_VERBOSITY:-0} > 0 ]]
 then
   echo "emews-r deactivate.sh: unsetting R_LIBS_USER"
 fi
