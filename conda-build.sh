@@ -113,10 +113,8 @@ if [[ -f $LOG ]] {
 }
 
 # Select clang name for meta.yaml macro
-# Dropping Python 3.9 on OS/X: GH has package issues
-export CLANG_NAME="clang"
-if [[ $PV =~ 3.9* ]] CLANG_NAME="clang-18"
-log "using CLANG_NAME='$CLANG_NAME'" | tee $LOG
+export SPEC_CLANG="clang==18.1.8"
+log "using SPEC_CLANG='$SPEC_CLANG'" | tee $LOG
 
 if (( ${#S} )) {
   log "settings-only: exit." | tee $LOG
