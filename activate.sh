@@ -5,16 +5,18 @@
 #      from different compilers do not get automatically
 #      found and loaded
 # This effect is visible in .libPaths()
-# This is run in the user shell, probably either Bash or ZSH
+# This is run in the user shell,
+#      probably either Bash or ZSH,
+#      but could be POSIX sh so we must use POSIX syntax.
+#      This triggered the file named '0' issue.
 
-
-if [[ ${CONDA_VERBOSITY:-0} > 0 ]]
+if [ ${CONDA_VERBOSITY:-0} != 0 ]
 then
   echo "emews-r activate.sh: setting R_LIBS_USER"
 fi
 
-if [[ ! -z ${R_LIBS_USER+x} ]]; then
+if [ ! -z ${R_LIBS_USER+x} ]
+then
   export R_LIBS_USER_BACKUP="$R_LIBS_USER"
 fi
 export R_LIBS_USER="$CONDA_PREFIX/lib/R/library"
-
