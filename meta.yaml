@@ -3,7 +3,7 @@
 
 {% set name = "emews-r" %}
 # See README for version meanings:
-{% set version = "7" %}
+{% set version = "8" %}
 
 package:
   name:    {{ name }}
