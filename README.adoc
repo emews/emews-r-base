@@ -7,8 +7,6 @@ Only necessary for platform `osx-arm64`, due to a memory error in the official A
 
 Remember to use `capabilities()` to check features.
 
-Using R from SVN release branch 4.4.3 .  If this changes, update the EMEWS Tutorial docs.
-
 == User installation
 
 The end user should be able to simply:
@@ -60,8 +58,10 @@ emews-r::
 
 === Numbers
 
-* *7* : 2025-11-07 : Clean up `activate/deactivate.sh` output. Issue emews/EMEWS_Issues#80
-* *8* : 2025-11-07 : Fix `activate/deactivate.sh` file named 0 issue
+If the R version changes, update the EMEWS Tutorial docs.
+
+* *7* : 2025-11-07 : Clean up `activate/deactivate.sh` output. Issue emews/EMEWS_Issues#80 .  R 4.4.3
+* *8* : 2025-11-07 : Fix `activate/deactivate.sh` file named 0 issue.  R 4.4.3
 
 == Usage
 
@@ -72,10 +72,8 @@ emews-r::
 == Notes
 
 Remember to:
-. Update PLATFORM
-.. in conda-build.sh
-.. in meta.yaml
-. Update `meta.yaml:source:path:`
+
+. Update PLATFORM  in conda-build.sh
 . Install xcrun
 
 === For SSH
@@ -86,7 +84,7 @@ Remember to:
 === Interactive builds (for humans)
 
 . Install a fresh Anaconda
-. `$ ./human-setup.sh`
+. `$ ./setup-human.sh`
 . `$ ./human-build.sh R_SVN WORK` +
 where
 `R_SVN` is the R SVN checkout and
