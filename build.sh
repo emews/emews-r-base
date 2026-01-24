@@ -41,12 +41,9 @@ source $RECIPE_DIR/setup-compilers.sh
 
 {
   echo "python:" $( which python )
-  show TIMESTAMP
-  show PWD
-  show RECIPE_DIR
-  show SRC_DIR
-  show PREFIX
-  show CC
+  show TIMESTAMP PWD
+  show RECIPE_DIR SRC_DIR
+  show PREFIX CC CXX OBJC FC
 } | tee $RECIPE_DIR/build-metadata.log
 
 if [[ $PLATFORM =~ osx-* ]]
