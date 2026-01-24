@@ -4,11 +4,12 @@
 # Used by build.sh
 # Can also be used interactively
 
-export CC=$(  which clang    )
-export CXX=$( which clang++  )
-export FC=$(  which gfortran )
+export CC=$(   which clang    )
+export CXX=$(  which clang++  )
+export OBJC=$( which clang    )
+export FC=$(   which gfortran )
 # For clang-15
-export CPP=$( which clang-cpp )
+export CPP=$(  which clang-cpp )
 export CXXCPP=$CPP
 
 export FC=$CONDA_PREFIX/bin/gfortran
