@@ -62,6 +62,7 @@ If the R version changes, update the EMEWS Tutorial docs.
 
 * *7* : 2025-11-07 : Clean up `activate/deactivate.sh` output. Issue emews/EMEWS_Issues#80 .  R 4.4.3
 * *8* : 2025-11-07 : Fix `activate/deactivate.sh` file named 0 issue.  R 4.4.3
+* *9* : 2026-10-05 : Pin `gfortran 16.2.*` (build + run) so the `FLIBS` gcc path baked into `Makeconf` matches the installed gfortran; fixes `-lemutls_w` R package build failures.  R 4.4.3
 
 == Usage
 

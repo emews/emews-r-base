@@ -3,7 +3,7 @@
 
 {% set name = "emews-r" %}
 # See README for version meanings:
-{% set version = "8" %}
+{% set version = "9" %}
 
 package:
   name:    {{ name }}
@@ -28,7 +28,12 @@ requirements:
     - libcurl
     - pcre2
     - xz
-    - gfortran
+    # Pin gfortran minor series: R bakes the gfortran lib dir into
+    # lib/R/etc/Makeconf (FLIBS, e.g. .../lib/gcc/.../16.2.0). If gfortran
+    # is unpinned, a newer conda-forge gfortran at install time no longer
+    # matches that baked path and R package builds fail with
+    # "library not found for -lemutls_w". Keep build and run in sync.
+    - gfortran 16.2.*
     - zlib
     - xorg-libx11 # xorg-x11-proto-devel
     - xorg-xorgproto
@@ -53,7 +58,8 @@ requirements:
     - libcurl
     - pcre2
     - xz
-    - gfortran
+    # See note above: keep run pin in sync with build pin.
+    - gfortran 16.2.*
     - zlib
     - xorg-libx11 # xorg-x11-proto-devel
     - xorg-xorgproto
